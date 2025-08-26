@@ -1,10 +1,12 @@
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Map from '../components/Map';
+
+const Map = dynamic(() => import('../components/Map'), { ssr: false });
 import Recommendation from '../components/Recommendation';
 
-export default function Results() {
+const ResultsComponent = () => {
   const { departure, arrival, datetime } = useRouter().query;
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -39,8 +41,18 @@ export default function Results() {
   return (
     <div className="results-container">
       <h1>Your Recommendation</h1>
-      <Recommendation recommendation={data.recommendation} />
-      <Map path={data.path} sunPositions={data.sunPositions} />
+      <Recommendation 
+        recommendation={data.recommendation} 
+        reason={data.reason}
+        confidence={data.confidence}
+        flightInfo={data.flightInfo}
+        sunInfo={data.sunInfo}
+      />
+      {data.positions && data.positions.length > 0 && (
+        <Map path={data.positions} sunPositions={data.positions} />
+      )}
     </div>
   );
 }
+
+export default ResultsComponent;
