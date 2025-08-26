@@ -1,4 +1,11 @@
 export default function Recommendation({ recommendation, reason, confidence, flightInfo, sunInfo }) {
+  const scrollToMap = () => {
+    const mapSection = document.querySelector('.map-section');
+    if (mapSection) {
+      mapSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="recommendation-container">
       <h2 className="recommendation-title">Recommended Side</h2>
@@ -46,6 +53,16 @@ export default function Recommendation({ recommendation, reason, confidence, fli
           </div>
         </div>
       )}
+
+      {/* View Flight Path Button */}
+      <div className="map-button-container">
+        <button 
+          onClick={scrollToMap}
+          className="view-map-button"
+        >
+          🗺️ View Flight Path
+        </button>
+      </div>
     </div>
   );
 }
