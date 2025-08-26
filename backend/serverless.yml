@@ -1,0 +1,23 @@
+service: scenic-seat-recommender-backend
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  environment:
+    NODE_ENV: production
+    FRONTEND_URL: ${env:FRONTEND_URL}
+
+functions:
+  api:
+    handler: lambda.handler
+    events:
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
+    memorySize: 512
+    timeout: 30
+
+plugins:
+  - serverless-offline

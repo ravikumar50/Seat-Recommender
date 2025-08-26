@@ -1,0 +1,26 @@
+{
+  "name": "scenic-seat-backend",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "build": "echo 'No build step required for Node.js'",
+    "postinstall": "echo 'Backend ready for production'"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "suncalc": "^1.8.0",
+    "dotenv": "^8.2.0",
+    "cors": "^2.8.5",
+    "helmet": "^4.6.0",
+    "node-cache": "^5.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
